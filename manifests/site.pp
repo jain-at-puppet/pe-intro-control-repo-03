@@ -25,7 +25,10 @@ File { backup => false }
 #
 # For more on node definitions, see: https://puppet.com/docs/puppet/latest/lang_node_definitions.html
 node default {
-  if $facts['hostname'] =~ /(nixagent).*/ {
+  if $trusted['certname'] == "puppet.c.kmo-instruqt.internal" {
+    # Apply supported agent platform classes to master node
+    lookup('classes',Array[String], 'unique').include
+  } elsif $facts['hostname'] =~ /(nixagent).*/ {
     include role::webserver
   } else {
     include role::primary

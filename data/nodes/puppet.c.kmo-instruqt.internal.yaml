@@ -1,0 +1,2 @@
+classes:
+  - pe_repo::platform::ubuntu_2204_amd64
